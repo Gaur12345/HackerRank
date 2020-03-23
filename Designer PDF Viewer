@@ -1,0 +1,139 @@
+//Designer PDF Viewer
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the designerPdfViewer function below.
+    static int designerPdfViewer(int[] h, String word)
+    {
+        List <Integer> l1=new ArrayList<Integer>();
+        String s1="";
+        for(int i=0;i<word.length(); i++)
+        {
+           s1=word.substring(i,i+1);
+           switch(s1)
+           {
+               case "a" :
+                    l1.add(h[0]);
+                    break;
+                case "b":
+                    l1.add(h[1]);
+                    break;
+                case "c":
+                    l1.add(h[2]);
+                    break;
+                 case "d":
+                    l1.add(h[3]);
+                    break;
+                case "e":
+                    l1.add(h[4]);
+                    break;
+                case "f":
+                    l1.add(h[5]);
+                    break;
+                case "g":
+                    l1.add(h[6]);
+                    break;
+                case "h":
+                    l1.add(h[7]);
+                    break;
+                case "i":
+                    l1.add(h[8]);
+                    break;
+                case "j":
+                    l1.add(h[9]);
+                    break;
+                case "k":
+                    l1.add(h[10]);
+                    break;
+                case "l":
+                    l1.add(h[11]);
+                    break;
+                case "m":
+                    l1.add(h[12]);
+                    break;
+                case "n":
+                    l1.add(h[13]);
+                    break;
+                case "o":
+                    l1.add(h[14]);
+                    break;
+                case "p":
+                    l1.add(h[15]);
+                    break;
+                case "q":
+                    l1.add(h[16]);
+                    break;
+                case "r":
+                    l1.add(h[17]);
+                    break;
+                case "s":
+                    l1.add(h[18]);
+                    break;
+                case "t":
+                    l1.add(h[19]);
+                    break;
+                case "u":
+                    l1.add(h[20]);
+                    break;
+                case "v":
+                    l1.add(h[21]);
+                    break;
+                case "w":
+                    l1.add(h[22]);
+                    break;
+                case "x":
+                    l1.add(h[23]);
+                    break;
+                case "y":
+                    l1.add(h[24]);
+                    break;
+                case "z":
+                    l1.add(h[25]);
+                    break;
+           }
+        }
+        
+        Collections.sort(l1);
+        int max=l1.get(l1.size()-1);
+        int height = max * word.length();
+        return height;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int[] h = new int[26];
+
+        String[] hItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < 26; i++) {
+            int hItem = Integer.parseInt(hItems[i]);
+            h[i] = hItem;
+        }
+
+        String word = scanner.nextLine();
+
+        int result = designerPdfViewer(h, word);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
+

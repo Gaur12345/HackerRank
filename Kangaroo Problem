@@ -1,0 +1,92 @@
+//Kangaroo Problem 
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the kangaroo function below.
+    static String kangaroo(int x1, int v1, int x2, int v2)
+    {
+        int s1=0,s2=0,i=0,j1=0,j2=0,si=0,so=0,l1=0,l2=0;
+        si=x1;
+        so=x2;
+        while(true)
+        {
+            if(x2 > x1 && v2 > v1)
+                return "NO";
+            if(x2>x1 && v1>v2)
+            {
+                si=si+v1;
+                so=so+v2;
+                if(so>=si)
+                {
+                    if(so==si)
+                        return "YES";
+                    
+                }
+                if(si>so)
+                    return "NO";
+            }
+            if(x2>x1 && v1==v2)
+                return "NO";
+            
+            else
+                {
+                    if(i==0)
+                    {
+                        s1=x1+v1;
+                        j1++;
+                        s2=x2+v2;
+                        j2++;
+                        i++;
+                        if(s1==s2 && j1==j2)
+                            return "YES";
+                    }
+                    else
+                    {
+                        s1=s1+v1;
+                        j1++;
+                        s2=s2+v2;
+                        j2++;
+                        if(s1==s2 && j1==j2)
+                            return "YES";
+                    }
+                }
+        }
+            
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] x1V1X2V2 = scanner.nextLine().split(" ");
+
+        int x1 = Integer.parseInt(x1V1X2V2[0]);
+
+        int v1 = Integer.parseInt(x1V1X2V2[1]);
+
+        int x2 = Integer.parseInt(x1V1X2V2[2]);
+
+        int v2 = Integer.parseInt(x1V1X2V2[3]);
+
+        String result = kangaroo(x1, v1, x2, v2);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
+

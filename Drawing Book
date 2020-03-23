@@ -1,0 +1,103 @@
+//Drawing Book
+
+
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    
+    static int pageCount(int n, int p)
+    {
+        int itr=1,start=1,count=0,s1=0,e2=0;
+        int end=n;
+        int arr[]=new int[10];
+        while(true)
+        {
+            if(start==p)
+            {
+                s1=0;
+                break;
+            }else if(( ++start == p) || ( ++start == p))
+            {
+                s1=itr;
+                break;
+            }
+            itr++;
+
+        }
+
+        int e1=end-1;
+        int itr2=1;
+        while(true)
+        {
+            if(end%2==0)
+            {
+                int ko=end-p;
+                if(ko==1)
+                {
+                    e2=1;
+                    break;
+                }   
+            }
+            if(end==p)
+            {
+                e2=0;
+                break;
+            }
+            else if(e1==p)
+            {
+                e2=0;
+                break;
+            }
+            else if((--e1==p) || (--e1==p))
+            {
+                e2=itr2;
+                break;
+            }
+            else if((--end==p) || (--end==p))
+            {
+                e2=itr2;
+                break;
+            }
+            
+            itr2++;
+        }
+
+        if(s1<e2)
+        {
+            return s1;
+        }
+        else
+        {
+            return e2;
+        }
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])*");
+
+        int p = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])*");
+
+        int result = pageCount(n, p);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
+

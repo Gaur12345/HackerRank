@@ -1,0 +1,130 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'classifySignals' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER_ARRAY freq_standard
+     *  2. INTEGER_ARRAY freq_signals
+     */
+
+    public static List<Integer> classifySignals(List<Integer> freq_standard, List<Integer> freq_signals)
+    {
+        List <Integer> l1=new ArrayList<Integer>();
+        List <Integer> l2=new ArrayList<Integer>();
+        
+        Iterator itr=l1.iterator();
+  
+        int temp=0,ch=0,dis=0,min=0,index=0,flag=0;
+        
+        for(int i=0;i<freq_signals.size();i++)
+        {
+            temp=freq_signals.get(i);
+            for(int j=0;j<freq_standard.size();j++)
+            {
+                ch=freq_standard.get(j);
+                dis=Math.abs(temp-ch);
+                l1.add(dis);
+            }
+           
+            min=l1.get(0);
+            index=1;
+            for(int m=0;m<l1.size();m++)
+            {
+                if(min>l1.get(m))
+                {
+                    min=l1.get(m);
+                    index=m+1;
+                    flag=1;
+                }
+            }
+            if(flag==1 || index==1)
+            {
+                l2.add(index);
+                l1.clear();
+                index=0;
+                flag=0;
+            }
+            else
+            {
+                
+                for(int k=0;k<l1.size();k++)
+                {
+                    for(int n=k+1;n<freq_standard.size()-1;n++)
+                    {
+                        if(l1.get(k)==l1.get(n))
+                        {
+                            if(freq_standard.get(k)> freq_standard.get(k+1))
+                            {
+                                l2.add(k+1);
+                            }
+                            else
+                            {
+                                 l2.add(n+1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+       
+        return l2;
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int n = Integer.parseInt(firstMultipleInput[0]);
+
+        int q = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] fTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> f = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int fItem = Integer.parseInt(fTemp[i]);
+            f.add(fItem);
+        }
+
+        String[] FTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> F = new ArrayList<>();
+
+        for (int i = 0; i < q; i++) {
+            int FItem = Integer.parseInt(FTemp[i]);
+            F.add(FItem);
+        }
+
+        List<Integer> ans = Result.classifySignals(f, F);
+
+        for (int i = 0; i < ans.size(); i++) {
+            bufferedWriter.write(String.valueOf(ans.get(i)));
+
+            if (i != ans.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

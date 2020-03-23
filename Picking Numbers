@@ -1,0 +1,99 @@
+//Picking Numbers
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'pickingNumbers' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts INTEGER_ARRAY a as parameter.
+     */
+
+    public static int pickingNumbers(List<Integer> a)
+    {
+       // Collections.sort(a);
+        List <Integer> l1=new ArrayList<Integer>();
+        List <Integer> l2=new ArrayList<Integer>();
+        Iterator itr=a.iterator();
+        int temp=a.get(0);
+        int num=0,cal=0;
+        while(itr.hasNext())
+        {
+            num=(Integer)itr.next();
+            cal=Math.abs(num-temp);
+            if(cal<=1)
+            {
+                l1.add(num);
+            }   
+        }
+
+        Collections.sort(l1);
+        num=0;
+       
+        if(l1.size()>2)
+        {
+        for(int i=1;i<l1.size();i++)
+        { 
+            temp=l1.get(0);
+            for(int j=i+1;j<l1.size();j++)
+            {
+                num=(Integer)l1.get(j);
+                cal=Math.abs(temp-num);
+                if(cal<=1)
+                {
+                
+                }
+                else
+                {
+                    l1.remove(j);
+                    temp=0;
+                }
+            }
+        }
+
+            int k=l1.size();
+            return k;
+        }
+        int m=l1.size();
+        return m;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] aTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> a = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int aItem = Integer.parseInt(aTemp[i]);
+            a.add(aItem);
+        }
+
+        int result = Result.pickingNumbers(a);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+
+

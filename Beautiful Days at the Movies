@@ -1,0 +1,67 @@
+			//Beautiful Days at the Movies
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the beautifulDays function below.
+    static int beautifulDays(int i, int j, int k)
+    {
+        double sum=0;
+        int count=0,r=0,rev=0,num=0,num1=0;
+        for(int m=i;m<=j;m++)
+        {
+            num1=num=m;
+            while(num1 > 0)
+            {
+                r= num1%10;
+                rev=rev * 10 + r;
+                num1=num1/10;
+            }
+
+            Double number= new Double(num);
+            Double reverse= new Double(rev);
+            Double sumof= new Double(k);
+
+            sum = (number - reverse) / sumof;
+            if(sum - Math.floor(sum) == 0 )
+            {
+                count++;
+            }
+            rev=0;
+
+        }
+        return count;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] ijk = scanner.nextLine().split(" ");
+
+        int i = Integer.parseInt(ijk[0]);
+
+        int j = Integer.parseInt(ijk[1]);
+
+        int k = Integer.parseInt(ijk[2]);
+
+        int result = beautifulDays(i, j, k);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
+

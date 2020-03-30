@@ -1,0 +1,117 @@
+// High Security Strings
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'getStrength' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. STRING password
+     *  2. INTEGER weight_a
+     */
+
+    public static int getStrength(String password, int weight_a)
+    {
+       List <String> l1=new ArrayList<String>();
+        int total=0;
+       l1.add("a"); 
+       l1.add("b");
+        l1.add("c");
+        l1.add("d");
+        l1.add("e");
+        l1.add("f");
+        l1.add("g");
+        l1.add("h");
+        l1.add("i");
+        l1.add("j");
+        l1.add("k");
+        l1.add("l");
+        l1.add("m");
+        l1.add("n");
+        l1.add("o");
+        l1.add("p");
+        l1.add("q");
+        l1.add("r");
+        l1.add("s");
+        l1.add("t");
+        l1.add("u");
+        l1.add("v");
+        l1.add("w");
+        l1.add("x");
+        l1.add("y");
+        l1.add("z");
+     
+       HashMap <Integer,String> hm=new HashMap<Integer,String>();
+       for(int i=0;i<26;i++)
+       {
+           if(weight_a < 26)
+           {
+               hm.put(weight_a,l1.get(i));
+               weight_a++;
+           }
+           else
+           {
+               weight_a=0;
+               hm.put(weight_a,l1.get(i));
+               weight_a++; 
+           }
+       }
+        
+       String str="";
+       for(int i=0;i<password.length();i++)
+       {
+           str=password.substring(i,i+1);
+           if(hm.containsValue(str))
+           {
+               for(Map.Entry mo:hm.entrySet())
+               {
+                   int key=(Integer)mo.getKey();
+                   String s1=(String)mo.getValue();
+                   if(s1.equals(str))
+                   {
+                       total = total + key;
+                   }
+               }
+           }
+       }
+        
+        
+       
+        return total;
+            
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String password = bufferedReader.readLine();
+
+        int weight_a = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int strength = Result.getStrength(password, weight_a);
+
+        bufferedWriter.write(String.valueOf(strength));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

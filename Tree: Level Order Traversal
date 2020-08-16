@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node {
+    
+    int data;
+    struct node *left;
+    struct node *right;
+  
+};
+
+struct node* insert( struct node* root, int data ) {
+		
+	if(root == NULL) {
+	
+        struct node* node = (struct node*)malloc(sizeof(struct node));
+
+        node->data = data;
+
+        node->left = NULL;
+        node->right = NULL;
+        return node;
+	  
+	} else {
+      
+		struct node* cur;
+		
+		if(data <= root->data) {
+            cur = insert(root->left, data);
+            root->left = cur;
+		} else {
+            cur = insert(root->right, data);
+            root->right = cur;
+		}
+	
+		return root;
+	}
+}
+
+/* you only have to complete the function given below.  
+node is defined as  
+
+struct node {
+    
+    int data;
+    struct node *left;
+    struct node *right;
+  
+};
+
+*/
+int cal_height(struct node *n1);
+void printData(struct node *node, int level);
+void levelOrder( struct node *root)
+{
+    int h =cal_height(root);
+    int i;
+    for(i=1;i<=h;i++)
+        printData(root,i);
+}
+
+void printData(struct node *n1, int level)
+{
+    if(n1==NULL)
+    return;
+    if(level==1)
+        printf("%d ",n1->data);
+    else if(level > 1)
+    {
+        printData(n1->left,level-1);
+        printData(n1->right,level-1);
+    }
+
+}
+
+int cal_height(struct node *n1)
+{
+    if(n1==NULL)
+     return 0;
+    else 
+    {
+        int lh = cal_height(n1->left);
+        int rh= cal_height(n1->right);
+        if(lh>rh)
+            return (lh +1);
+        else
+            return (rh+1);
+    }
+}
